@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Event Registration</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      height: 100vh;
+      display: flex;
+      background-image: url(design.jpg);
+      background-size: cover;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-box {
+      background-color: white;
+      border: 2px solid darkcyan;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 1000px;
+      height: 90vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    h2 {
+      text-align: center;
+      color: darkcyan;
+      margin-bottom: 10px;
+    }
+
+    form {
+      flex: 1;
+      display: flex;
+      gap: 30px;
+      overflow-y: auto;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1.5px solid darkcyan;
+      border-radius: 5px;
+    }
+
+    .checkbox-group label {
+      display: block;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+
+    .checkbox-group {
+      margin-top: 10px;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    input[type="submit"] {
+      background-color: darkcyan;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      
+      
+    }
+
+    input[type="submit"]:hover {
+      background-color: #007777;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1.5px solid darkcyan;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .bi-arrow-left-circle-fill {
+      font-size: 80px;
+      color: darkcyan;
+      position: absolute;
+      left: 100px;
+      top: 50px;
+      cursor: pointer;
+
+    }
+  </style>
+  
+</head>
+
+<body>
+  <div class="boxitem1">
+    <i class="bi bi-arrow-left-circle-fill " onclick="goback()"></i>
+  </div>
+  <div class="form-box">
+    <h2>Event Registration Form</h2>
+
+    <form action="https://script.google.com/macros/s/AKfyc.../exec" method="post">
+
+      <div class="column">
+        <label>Team Name:</label>
+        <input type="text" name="team_name" required>
+
+        <label>College Name:</label>
+        <input type="text" name="college_name" required>
+        <label>Year of Study:</label>
+        <select name="year" required>
+          <option value="" disabled selected>Select your year</option>
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+          <option value="4th Year">4th Year</option>
+        </select>
+
+        <label>Team Member 1 Name:</label>
+        <input type="text" name="member1_name" required>
+
+        <label>Member 1 Phone Number:</label>
+        <input type="tel" name="member1_phone" required>
+
+        <label>Member 1 Email ID:</label>
+        <input type="email" name="member1_email" required>
+
+       
+      <div class="column">
+        <label>Team Member 2 Name:</label>
+        <input type="text" name="member2_name">
+
+        <label>Member 2 Phone Number:</label>
+        <input type="tel" name="member2_phone">
+
+        <label>Member 2 Email ID:</label>
+        <input type="email" name="member2_email">
+
+        <label>Select Events:</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="events" value="Paper Presentation"> Paper Presentation</label>
+          <label><input type="checkbox" name="events" value="Project Expo"> Project Expo</label>
+          <label><input type="checkbox" name="events" value="Robo Soccer"> Robo Soccer</label>
+          <label><input type="checkbox" name="events" value="Dialux"> Dialux</label>
+          <label><input type="checkbox" name="events" value="Circuit Connection"> Circuit Connection</label>
+          <label><input type="checkbox" name="events" value="Scavenger Hunt"> Scavenger Hunt</label>
+          <label><input type="checkbox" name="events" value="Tech Quiz"> Tech Quiz</label>
+        </div>
+        <div class="submit-btn">
+        <input type="submit" value="Submit Registration">
+      </div>
+      </div>
+      
+    </form>
+
+
+
+  </div>
+<script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        team_name: form.team_name.value,
+        college_name: form.college_name.value,
+        year: form.year.value,
+        member1_name: form.member1_name.value,
+        member1_phone: form.member1_phone.value,
+        member1_email: form.member1_email.value,
+        member2_name: form.member2_name.value,
+        member2_phone: form.member2_phone.value,
+        member2_email: form.member2_email.value,
+        events: Array.from(form.querySelectorAll("input[name='events']:checked")).map(cb => cb.value),
+       
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbxwJUT8ksGbWyjbVc0oqUNdodOGe-UYgWqfhXD23nA4qUFNGIFRIqWZ3pwogSdzcB4w5A/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => res.text())
+        .then(res => {
+          alert(" Registration Submitted Successfully!");
+          form.reset();
+        })
+        .catch(err => {
+          alert(" Submission failed. Try again.");
+          console.error(err);
+        });
+    });
+
+    goback = () => {
+      window.location.href = "sympo.html";
+    };
+
+  </script>
+</body>
+
+</html>
